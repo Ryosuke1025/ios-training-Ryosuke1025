@@ -21,10 +21,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func close(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "EmptyView", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(withIdentifier: "EmptyView")
         self.dismiss(animated: true)
-        //self.present(nextVC, animated: true, completion: nil)
     }
 }
 
