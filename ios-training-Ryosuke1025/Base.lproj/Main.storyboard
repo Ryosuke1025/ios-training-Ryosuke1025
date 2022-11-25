@@ -38,17 +38,17 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="np2-7b-dhW">
-                                <rect key="frame" x="146.66666666666666" y="534.33333333333337" width="100" height="20.333333333333371"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="np2-7b-dhW">
+                                <rect key="frame" x="98.333333333333329" y="534.33333333333337" width="196.33333333333337" height="20.333333333333371"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rI3-nU-aal">
-                                        <rect key="frame" x="0.0" y="0.0" width="32" height="20.333333333333332"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rI3-nU-aal">
+                                        <rect key="frame" x="0.0" y="0.0" width="98.333333333333329" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="Red"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xr-8D-aMy">
-                                        <rect key="frame" x="72" y="0.0" width="28" height="20.333333333333332"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xr-8D-aMy">
+                                        <rect key="frame" x="98.333333333333314" y="0.0" width="98" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="AccentColor"/>
                                         <nil key="highlightedColor"/>
@@ -66,6 +66,7 @@
                             <constraint firstItem="np2-7b-dhW" firstAttribute="top" secondItem="dkn-EE-RcG" secondAttribute="bottom" constant="10" id="XfG-hT-l5O"/>
                             <constraint firstItem="Ulo-oB-808" firstAttribute="top" secondItem="np2-7b-dhW" secondAttribute="bottom" constant="80" id="ZAF-0k-XuP"/>
                             <constraint firstItem="Ulo-oB-808" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pNR-dc-16U"/>
+                            <constraint firstItem="np2-7b-dhW" firstAttribute="width" secondItem="dkn-EE-RcG" secondAttribute="width" id="yg6-Tk-e50"/>
                         </constraints>
                     </view>
                     <connections>
