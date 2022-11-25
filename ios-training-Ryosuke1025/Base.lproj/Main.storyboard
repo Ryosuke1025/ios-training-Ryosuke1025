@@ -61,7 +61,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Reload"/>
                                         <connections>
-                                            <action selector="Reload:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rHg-Ys-ibB"/>
+                                            <action selector="reloadWeatherImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nI6-c8-Bxt"/>
                                         </connections>
                                     </button>
                                 </subviews>
