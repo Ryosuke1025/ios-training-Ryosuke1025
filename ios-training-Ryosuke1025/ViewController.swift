@@ -9,24 +9,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var buttounHStack: UIStackView!
-    @IBOutlet weak var constraints: NSLayoutConstraint!
-    
+    @IBOutlet weak var image: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        image.image = UIImage(systemName: "star")
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let imageWidth = self.view.frame.size.width / 2
-        constraints.constant = imageWidth
-        buttounHStack.spacing = 20
-    }
-
 }
 
