@@ -24,8 +24,8 @@ class EmptyViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // 画面表示直後の処理を書く
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(withIdentifier: "Main")
+        let storyboard = UIStoryboard(name: "WeatherView", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(withIdentifier: "WeatherView")
         nextVC.modalPresentationStyle = .fullScreen
         self.present(nextVC, animated: true, completion: nil)
     }
