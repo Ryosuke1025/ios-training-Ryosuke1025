@@ -17,6 +17,8 @@
 		E31B1E55292C70A900C57E79 /* ios_training_Ryosuke1025UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E54292C70A900C57E79 /* ios_training_Ryosuke1025UITests.swift */; };
 		E31B1E57292C70A900C57E79 /* ios_training_Ryosuke1025UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E56292C70A900C57E79 /* ios_training_Ryosuke1025UITestsLaunchTests.swift */; };
 		E31B1E65292C72E900C57E79 /* YumemiWeather in Frameworks */ = {isa = PBXBuildFile; productRef = E31B1E64292C72E900C57E79 /* YumemiWeather */; };
+		E31B1E6729308D1000C57E79 /* EmptyView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E31B1E6629308D1000C57E79 /* EmptyView.storyboard */; };
+		E31B1E6929308E7900C57E79 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E6829308E7900C57E79 /* EmptyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		E31B1E50292C70A900C57E79 /* ios-training-Ryosuke1025UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-training-Ryosuke1025UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E31B1E54292C70A900C57E79 /* ios_training_Ryosuke1025UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_training_Ryosuke1025UITests.swift; sourceTree = "<group>"; };
 		E31B1E56292C70A900C57E79 /* ios_training_Ryosuke1025UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_training_Ryosuke1025UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E31B1E6629308D1000C57E79 /* EmptyView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmptyView.storyboard; sourceTree = "<group>"; };
+		E31B1E6829308E7900C57E79 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +108,9 @@
 				E31B1E33292C70A900C57E79 /* AppDelegate.swift */,
 				E31B1E35292C70A900C57E79 /* SceneDelegate.swift */,
 				E31B1E37292C70A900C57E79 /* ViewController.swift */,
+				E31B1E6829308E7900C57E79 /* EmptyViewController.swift */,
 				E31B1E39292C70A900C57E79 /* Main.storyboard */,
+				E31B1E6629308D1000C57E79 /* EmptyView.storyboard */,
 				E31B1E3C292C70A900C57E79 /* Assets.xcassets */,
 				E31B1E3E292C70A900C57E79 /* LaunchScreen.storyboard */,
 				E31B1E41292C70A900C57E79 /* Info.plist */,
@@ -241,6 +247,7 @@
 			files = (
 				E31B1E40292C70A900C57E79 /* LaunchScreen.storyboard in Resources */,
 				E31B1E3D292C70A900C57E79 /* Assets.xcassets in Resources */,
+				E31B1E6729308D1000C57E79 /* EmptyView.storyboard in Resources */,
 				E31B1E3B292C70A900C57E79 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,6 +275,7 @@
 			files = (
 				E31B1E38292C70A900C57E79 /* ViewController.swift in Sources */,
 				E31B1E34292C70A900C57E79 /* AppDelegate.swift in Sources */,
+				E31B1E6929308E7900C57E79 /* EmptyViewController.swift in Sources */,
 				E31B1E36292C70A900C57E79 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
