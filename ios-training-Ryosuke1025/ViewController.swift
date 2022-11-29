@@ -8,12 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var image: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        image.image = UIImage(systemName: "star")
     }
-
-
 }
 
