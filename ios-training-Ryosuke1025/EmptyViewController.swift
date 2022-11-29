@@ -8,7 +8,7 @@
 import UIKit
 class EmptyViewController: UIViewController {
     
-    //MARK: -Life Cycle
+    //MARK: - Life Cycle
     
     override func viewDidLoad() {
         // 画面初期化処理を書く
