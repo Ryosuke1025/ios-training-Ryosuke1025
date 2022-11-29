@@ -6,7 +6,7 @@
 //
 
 import UIKit
-class EmptyViewController: UIViewController {
+final class EmptyViewController: UIViewController {
     
     //MARK: - Life Cycle
     
