@@ -9,16 +9,17 @@ import UIKit
 
 final class WeatherViewController: UIViewController {
     
+    // MARK: - Properties
+    
     let weatherModel = WeatherModel()
+    @IBOutlet weak var weatherImage: UIImageView!
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         weatherModel.delegate = self
     }
-    
-    // MARK: - Properties
-    
-    @IBOutlet weak var weatherImage: UIImageView!
     
     // MARK: - Actions
     
