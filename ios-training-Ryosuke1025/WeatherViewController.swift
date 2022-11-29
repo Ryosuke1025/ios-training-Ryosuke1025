@@ -8,24 +8,28 @@
 import UIKit
 import YumemiWeather
 
-final class ViewController: UIViewController {
+final class WeatherViewController: UIViewController {
     
-    //MARK: - Properties
+    // MARK: - Properties
     
     @IBOutlet weak var weatherImage: UIImageView!
     
-    //MARK: - Actions
+    // MARK: - Actions
     
     @IBAction func reloadWeatherImage(_ sender: Any) {
         updateWeather()
     }
+    
+    @IBAction func close(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
 }
 
-extension ViewController {
+extension WeatherViewController {
     
-    //MARK: - Methods
+    // MARK: - Methods
     
-    private func updateWeather(){
+    private func updateWeather() {
         let weather = YumemiWeather.fetchWeatherCondition()
         switch weather {
         case "sunny":
@@ -35,6 +39,7 @@ extension ViewController {
         case "cloudy":
             weatherImage.tintColor = .systemGray
             weatherImage.image = UIImage(named: "cloudy")?.withRenderingMode(.alwaysTemplate)
+        
         case "rainy":
             weatherImage.tintColor = .systemBlue
             weatherImage.image = UIImage(named: "rainy")?.withRenderingMode(.alwaysTemplate)
