@@ -23,6 +23,10 @@ final class WeatherViewController: UIViewController {
     @IBAction func close(_ sender: Any) {
         self.dismiss(animated: true)
     }
+    
+    deinit {
+        print("WeatherViewController is deinit")
+    }
 }
 
 extension WeatherViewController {
