@@ -13,7 +13,7 @@ protocol WeatherModelDelegate: AnyObject {
 }
 
 final class WeatherModel {
-    var delegate: WeatherModelDelegate?
+    weak var delegate: WeatherModelDelegate?
     
     func fetchWeather() {
         let weather = YumemiWeather.fetchWeatherCondition()
