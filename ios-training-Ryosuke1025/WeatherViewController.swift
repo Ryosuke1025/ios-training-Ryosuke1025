@@ -56,4 +56,10 @@ extension WeatherViewController: WeatherModelDelegate {
             weatherImage.image = UIImage(named: "question")?.withRenderingMode(.alwaysTemplate)
         }
     }
+    
+    func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String) {
+        let alertController = UIAlertController(title: "エラーが発生しました", message: error, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
 }

@@ -10,13 +10,26 @@ import YumemiWeather
 
 protocol WeatherModelDelegate: AnyObject {
     func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: String)
+    func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String)
 }
 
 final class WeatherModel {
     weak var delegate: WeatherModelDelegate?
     
     func fetchWeather() {
-        let weather = YumemiWeather.fetchWeatherCondition()
-        delegate?.weatherModel(self, didFetchWeather: weather)
+        let area = "tokyo"
+        do{
+            let weather = try YumemiWeather.fetchWeatherCondition(at: area)
+            delegate?.weatherModel(self, didFetchWeather: weather)
+        } catch let error as YumemiWeatherError{
+            switch error {
+            case .invalidParameterError:
+                delegate?.weatherModel(self, didOccurError: "jsonのパースに失敗しました")
+            case .unknownError:
+                delegate?.weatherModel(self, didOccurError: "乱数4が生成されたため、エラーが発生しました")
+            }
+        } catch {
+            delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
+        }
     }
 }
