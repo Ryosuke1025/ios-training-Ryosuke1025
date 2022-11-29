@@ -6,9 +6,15 @@
 //
 
 import UIKit
-import YumemiWeather
 
 final class WeatherViewController: UIViewController {
+    
+    let weatherModel = WeatherModel()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        weatherModel.delegate = self
+    }
     
     // MARK: - Properties
     
@@ -17,7 +23,7 @@ final class WeatherViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func reloadWeatherImage(_ sender: Any) {
-        updateWeather()
+        weatherModel.fetchWeather()
     }
     
     @IBAction func close(_ sender: Any) {
@@ -29,12 +35,8 @@ final class WeatherViewController: UIViewController {
     }
 }
 
-extension WeatherViewController {
-    
-    // MARK: - Methods
-    
-    private func updateWeather() {
-        let weather = YumemiWeather.fetchWeatherCondition()
+extension WeatherViewController: WeatherModelDelegate {
+    func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: String) {
         switch weather {
         case "sunny":
             weatherImage.tintColor = .systemRed
