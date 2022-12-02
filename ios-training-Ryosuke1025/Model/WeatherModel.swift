@@ -31,7 +31,7 @@ final class WeatherModel {
             case .invalidParameterError:
                 delegate?.weatherModel(self, didOccurError: "jsonのパースに失敗しました")
             case .unknownError:
-                delegate?.weatherModel(self, didOccurError: "乱数4が生成されたため、エラーが発生しました")
+                delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
             }
         } catch {
             delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
