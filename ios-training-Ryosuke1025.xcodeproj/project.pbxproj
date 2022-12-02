@@ -19,6 +19,7 @@
 		E31B1E6929308E7900C57E79 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E6829308E7900C57E79 /* EmptyViewController.swift */; };
 		E31B1E6B2935C6E300C57E79 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E6A2935C6E300C57E79 /* WeatherModel.swift */; };
 		E3B4324D293995310049255C /* WeatherView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3B4324C293995310049255C /* WeatherView.storyboard */; };
+		E3B4324F29399ECD0049255C /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4324E29399ECD0049255C /* Weather.swift */; };
 		E3CDA623293994F900909863 /* EmptyView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3CDA622293994F900909863 /* EmptyView.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		E31B1E6829308E7900C57E79 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 		E31B1E6A2935C6E300C57E79 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		E3B4324C293995310049255C /* WeatherView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WeatherView.storyboard; sourceTree = "<group>"; };
+		E3B4324E29399ECD0049255C /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		E3CDA622293994F900909863 /* EmptyView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmptyView.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				E31B1E6A2935C6E300C57E79 /* WeatherModel.swift */,
+				E3B4324E29399ECD0049255C /* Weather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				E31B1E34292C70A900C57E79 /* AppDelegate.swift in Sources */,
 				E31B1E6929308E7900C57E79 /* EmptyViewController.swift in Sources */,
 				E31B1E36292C70A900C57E79 /* SceneDelegate.swift in Sources */,
+				E3B4324F29399ECD0049255C /* Weather.swift in Sources */,
 				E31B1E6B2935C6E300C57E79 /* WeatherModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

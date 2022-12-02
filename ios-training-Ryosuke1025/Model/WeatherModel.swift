@@ -9,7 +9,7 @@ import Foundation
 import YumemiWeather
 
 protocol WeatherModelDelegate: AnyObject {
-    func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: String)
+    func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: Weather)
     func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String)
 }
 
@@ -22,9 +22,24 @@ final class WeatherModel {
     // MARK: - Methods
     
     func fetchWeather() {
-        let area = "tokyo"
-        do {
-            let weather = try YumemiWeather.fetchWeatherCondition(at: area)
+        let jsonString =
+        """
+        {
+            "area" : "tokyo",
+            "date": "2020-04-01T12:00:00+09:00"
+        }
+        """
+        
+        do{
+            let weatherJson = try YumemiWeather.fetchWeather(jsonString)
+            guard let jsonData = weatherJson.data(using: .utf8) else {
+                print("データ型への変換に失敗しました")
+                return
+            }
+            guard let weather = try? JSONDecoder().decode(Weather.self, from: jsonData) else {
+                print("デコードに失敗しました")
+                return
+            }
             delegate?.weatherModel(self, didFetchWeather: weather)
         } catch let error as YumemiWeatherError{
             switch error {

@@ -13,6 +13,8 @@ final class WeatherViewController: UIViewController {
     
     let weatherModel = WeatherModel()
     @IBOutlet weak var weatherImage: UIImageView!
+    @IBOutlet weak var max_temperature: UILabel!
+    @IBOutlet weak var min_temperature: UILabel!
     
     // MARK: - Life Cycle
     
@@ -42,8 +44,8 @@ extension WeatherViewController: WeatherModelDelegate {
     
     // MARK: - Methods
     
-    func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: String) {
-        switch weather {
+    func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: Weather) {
+        switch weather.weather_condition {
         case "sunny":
             weatherImage.tintColor = .systemRed
             weatherImage.image = UIImage(named: "sunny")?.withRenderingMode(.alwaysTemplate)
@@ -60,6 +62,9 @@ extension WeatherViewController: WeatherModelDelegate {
             weatherImage.tintColor = .systemPurple
             weatherImage.image = UIImage(named: "question")?.withRenderingMode(.alwaysTemplate)
         }
+        
+        max_temperature.text = String(weather.max_temperature)
+        min_temperature.text = String(weather.min_temperature)
     }
     
     func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String) {
