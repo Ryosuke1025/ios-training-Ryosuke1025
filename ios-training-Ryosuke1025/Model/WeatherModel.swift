@@ -9,7 +9,7 @@ import Foundation
 import YumemiWeather
 
 protocol WeatherModelDelegate: AnyObject {
-    func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: Weather)
+    func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: ResponseModel)
     func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String)
 }
 
@@ -22,24 +22,27 @@ final class WeatherModel {
     // MARK: - Methods
     
     func fetchWeather() {
-        let jsonString =
-        """
-        {
-            "area" : "tokyo",
-            "date": "2020-04-01T12:00:00+09:00"
-        }
-        """
+        let encoder = JSONEncoder()
+        let decoder = JSONDecoder()
         
+        let call = CallModel(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
+        guard let jsonData = try? encoder.encode(call) else {
+            print("callからJSONデータへのエンコードに失敗しました")
+            return
+        }
+        guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+            print("データ型からString型への変換に失敗しました")
+            return
+        }
         do {
             let weatherJson = try YumemiWeather.fetchWeather(jsonString)
             guard let jsonData = weatherJson.data(using: .utf8) else {
-                print("データ型への変換に失敗しました")
+                print("受け取ったString型からデータ型への変換に失敗しました")
                 return
             }
-            let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            guard let weather = try? decoder.decode(Weather.self, from: jsonData) else {
-                print("デコードに失敗しました")
+            guard let weather = try? decoder.decode(ResponseModel.self, from: jsonData) else {
+                print("ResponseModelへのデコードに失敗しました")
                 return
             }
             delegate?.weatherModel(self, didFetchWeather: weather)

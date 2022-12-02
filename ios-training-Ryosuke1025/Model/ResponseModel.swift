@@ -7,16 +7,9 @@
 
 import Foundation
 
-struct Weather: Codable {
+struct ResponseModel: Codable {
     let maxTemperature: Int
     let date: String
     let minTemperature: Int
     let weatherCondition: String
-    
-    enum CodingKeys: CodingKey {
-        case maxTemperature
-        case date
-        case minTemperature
-        case weatherCondition
-    }
 }

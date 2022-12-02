@@ -44,7 +44,7 @@ extension WeatherViewController: WeatherModelDelegate {
     
     // MARK: - Methods
     
-    func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: Weather) {
+    func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: ResponseModel) {
         switch weather.weatherCondition {
         case "sunny":
             weatherImage.tintColor = .systemRed
