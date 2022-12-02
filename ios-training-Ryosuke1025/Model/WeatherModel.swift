@@ -14,7 +14,12 @@ protocol WeatherModelDelegate: AnyObject {
 }
 
 final class WeatherModel {
+    
+    // MARK: - Properties
+    
     weak var delegate: WeatherModelDelegate?
+    
+    // MARK: - Methods
     
     func fetchWeather() {
         let area = "tokyo"

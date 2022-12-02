@@ -31,12 +31,17 @@ final class WeatherViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    // MARK: - Deinit
+    
     deinit {
         print("WeatherViewController is deinit")
     }
 }
 
 extension WeatherViewController: WeatherModelDelegate {
+    
+    // MARK: - Methods
+    
     func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: String) {
         switch weather {
         case "sunny":

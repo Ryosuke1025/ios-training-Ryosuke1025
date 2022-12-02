@@ -10,16 +10,16 @@
 		E31B1E34292C70A900C57E79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E33292C70A900C57E79 /* AppDelegate.swift */; };
 		E31B1E36292C70A900C57E79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E35292C70A900C57E79 /* SceneDelegate.swift */; };
 		E31B1E38292C70A900C57E79 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E37292C70A900C57E79 /* WeatherViewController.swift */; };
-		E31B1E3B292C70A900C57E79 /* WeatherView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E31B1E39292C70A900C57E79 /* WeatherView.storyboard */; };
 		E31B1E3D292C70A900C57E79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E31B1E3C292C70A900C57E79 /* Assets.xcassets */; };
 		E31B1E40292C70A900C57E79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E31B1E3E292C70A900C57E79 /* LaunchScreen.storyboard */; };
 		E31B1E4B292C70A900C57E79 /* ios_training_Ryosuke1025Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E4A292C70A900C57E79 /* ios_training_Ryosuke1025Tests.swift */; };
 		E31B1E55292C70A900C57E79 /* ios_training_Ryosuke1025UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E54292C70A900C57E79 /* ios_training_Ryosuke1025UITests.swift */; };
 		E31B1E57292C70A900C57E79 /* ios_training_Ryosuke1025UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E56292C70A900C57E79 /* ios_training_Ryosuke1025UITestsLaunchTests.swift */; };
 		E31B1E65292C72E900C57E79 /* YumemiWeather in Frameworks */ = {isa = PBXBuildFile; productRef = E31B1E64292C72E900C57E79 /* YumemiWeather */; };
-		E31B1E6729308D1000C57E79 /* EmptyView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E31B1E6629308D1000C57E79 /* EmptyView.storyboard */; };
 		E31B1E6929308E7900C57E79 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E6829308E7900C57E79 /* EmptyViewController.swift */; };
 		E31B1E6B2935C6E300C57E79 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B1E6A2935C6E300C57E79 /* WeatherModel.swift */; };
+		E3B4324D293995310049255C /* WeatherView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3B4324C293995310049255C /* WeatherView.storyboard */; };
+		E3CDA623293994F900909863 /* EmptyView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3CDA622293994F900909863 /* EmptyView.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +44,6 @@
 		E31B1E33292C70A900C57E79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E31B1E35292C70A900C57E79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E31B1E37292C70A900C57E79 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		E31B1E3A292C70A900C57E79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WeatherView.storyboard; sourceTree = "<group>"; };
 		E31B1E3C292C70A900C57E79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E31B1E3F292C70A900C57E79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E31B1E41292C70A900C57E79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,9 +52,10 @@
 		E31B1E50292C70A900C57E79 /* ios-training-Ryosuke1025UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-training-Ryosuke1025UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E31B1E54292C70A900C57E79 /* ios_training_Ryosuke1025UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_training_Ryosuke1025UITests.swift; sourceTree = "<group>"; };
 		E31B1E56292C70A900C57E79 /* ios_training_Ryosuke1025UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_training_Ryosuke1025UITestsLaunchTests.swift; sourceTree = "<group>"; };
-		E31B1E6629308D1000C57E79 /* EmptyView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmptyView.storyboard; sourceTree = "<group>"; };
 		E31B1E6829308E7900C57E79 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 		E31B1E6A2935C6E300C57E79 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		E3B4324C293995310049255C /* WeatherView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WeatherView.storyboard; sourceTree = "<group>"; };
+		E3CDA622293994F900909863 /* EmptyView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmptyView.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,12 +109,9 @@
 			children = (
 				E31B1E33292C70A900C57E79 /* AppDelegate.swift */,
 				E31B1E35292C70A900C57E79 /* SceneDelegate.swift */,
-				E31B1E37292C70A900C57E79 /* WeatherViewController.swift */,
-				E31B1E6A2935C6E300C57E79 /* WeatherModel.swift */,
-				E31B1E6829308E7900C57E79 /* EmptyViewController.swift */,
-				E31B1E39292C70A900C57E79 /* WeatherView.storyboard */,
-				E31B1E6629308D1000C57E79 /* EmptyView.storyboard */,
-				E31B1E3C292C70A900C57E79 /* Assets.xcassets */,
+				E31B1E6C293983DF00C57E79 /* Controller */,
+				E31B1E6D2939840100C57E79 /* Model */,
+				E31B1E6E2939842400C57E79 /* View */,
 				E31B1E3E292C70A900C57E79 /* LaunchScreen.storyboard */,
 				E31B1E41292C70A900C57E79 /* Info.plist */,
 			);
@@ -136,6 +133,33 @@
 				E31B1E56292C70A900C57E79 /* ios_training_Ryosuke1025UITestsLaunchTests.swift */,
 			);
 			path = "ios-training-Ryosuke1025UITests";
+			sourceTree = "<group>";
+		};
+		E31B1E6C293983DF00C57E79 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E31B1E37292C70A900C57E79 /* WeatherViewController.swift */,
+				E31B1E6829308E7900C57E79 /* EmptyViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E31B1E6D2939840100C57E79 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E31B1E6A2935C6E300C57E79 /* WeatherModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E31B1E6E2939842400C57E79 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E3CDA622293994F900909863 /* EmptyView.storyboard */,
+				E3B4324C293995310049255C /* WeatherView.storyboard */,
+				E31B1E3C292C70A900C57E79 /* Assets.xcassets */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,9 +273,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E31B1E40292C70A900C57E79 /* LaunchScreen.storyboard in Resources */,
+				E3B4324D293995310049255C /* WeatherView.storyboard in Resources */,
 				E31B1E3D292C70A900C57E79 /* Assets.xcassets in Resources */,
-				E31B1E6729308D1000C57E79 /* EmptyView.storyboard in Resources */,
-				E31B1E3B292C70A900C57E79 /* WeatherView.storyboard in Resources */,
+				E3CDA623293994F900909863 /* EmptyView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,14 +341,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E31B1E39292C70A900C57E79 /* WeatherView.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E31B1E3A292C70A900C57E79 /* Base */,
-			);
-			name = WeatherView.storyboard;
-			sourceTree = "<group>";
-		};
 		E31B1E3E292C70A900C57E79 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
