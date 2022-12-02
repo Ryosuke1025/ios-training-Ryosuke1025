@@ -23,7 +23,7 @@ final class WeatherModel {
     
     func fetchWeather() {
         let area = "tokyo"
-        do{
+        do {
             let weather = try YumemiWeather.fetchWeatherCondition(at: area)
             delegate?.weatherModel(self, didFetchWeather: weather)
         } catch let error as YumemiWeatherError{
