@@ -12,9 +12,9 @@ final class WeatherViewController: UIViewController {
     // MARK: - Properties
     
     let weatherModel = WeatherModel()
-    @IBOutlet weak var weatherImage: UIImageView!
-    @IBOutlet weak var max_temperature: UILabel!
-    @IBOutlet weak var min_temperature: UILabel!
+    @IBOutlet private weak var weatherImage: UIImageView!
+    @IBOutlet private weak var max_temperature: UILabel!
+    @IBOutlet private weak var min_temperature: UILabel!
     
     // MARK: - Life Cycle
     
@@ -25,11 +25,11 @@ final class WeatherViewController: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func reloadWeatherImage(_ sender: Any) {
+    @IBAction private func reloadWeatherImage(_ sender: Any) {
         weatherModel.fetchWeather()
     }
     
-    @IBAction func close(_ sender: Any) {
+    @IBAction private func close(_ sender: Any) {
         self.dismiss(animated: true)
     }
     

@@ -30,7 +30,7 @@ final class WeatherModel {
         }
         """
         
-        do{
+        do {
             let weatherJson = try YumemiWeather.fetchWeather(jsonString)
             guard let jsonData = weatherJson.data(using: .utf8) else {
                 print("データ型への変換に失敗しました")
@@ -41,7 +41,7 @@ final class WeatherModel {
                 return
             }
             delegate?.weatherModel(self, didFetchWeather: weather)
-        } catch let error as YumemiWeatherError{
+        } catch let error as YumemiWeatherError {
             switch error {
             case .invalidParameterError:
                 delegate?.weatherModel(self, didOccurError: "jsonのパースに失敗しました")
