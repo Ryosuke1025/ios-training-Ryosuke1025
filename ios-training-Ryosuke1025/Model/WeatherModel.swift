@@ -36,7 +36,9 @@ final class WeatherModel {
                 print("データ型への変換に失敗しました")
                 return
             }
-            guard let weather = try? JSONDecoder().decode(Weather.self, from: jsonData) else {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            guard let weather = try? decoder.decode(Weather.self, from: jsonData) else {
                 print("デコードに失敗しました")
                 return
             }
