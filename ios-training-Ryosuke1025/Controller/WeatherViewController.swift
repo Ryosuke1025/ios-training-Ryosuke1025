@@ -31,12 +31,17 @@ final class WeatherViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    // MARK: - Deinit
+    
     deinit {
         print("WeatherViewController is deinit")
     }
 }
 
 extension WeatherViewController: WeatherModelDelegate {
+    
+    // MARK: - Methods
+    
     func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: String) {
         switch weather {
         case "sunny":
@@ -55,5 +60,11 @@ extension WeatherViewController: WeatherModelDelegate {
             weatherImage.tintColor = .systemPurple
             weatherImage.image = UIImage(named: "question")?.withRenderingMode(.alwaysTemplate)
         }
+    }
+    
+    func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String) {
+        let alertController = UIAlertController(title: "エラーが発生しました", message: error, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 }
