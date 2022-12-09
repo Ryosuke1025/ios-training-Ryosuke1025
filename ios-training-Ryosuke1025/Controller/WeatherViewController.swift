@@ -23,6 +23,11 @@ final class WeatherViewController: UIViewController {
         weatherModel.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNotificasion()
+    }
+    
     // MARK: - Actions
     
     @IBAction private func reloadWeatherImage(_ sender: Any) {
@@ -37,6 +42,26 @@ final class WeatherViewController: UIViewController {
     
     deinit {
         print("WeatherViewController is deinit")
+    }
+    
+    // MARK: - Notification Center
+    
+    func setNotificasion() {
+        NotificationCenter.default.addObserver(self, selector: #selector(viewWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(viewDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+    
+    @objc func viewWillEnterForeground(_ notification: Notification) {
+        if self.isViewLoaded && self.view.window != nil {
+            print("フォアグラウンド")
+            weatherModel.fetchWeather()
+        }
+    }
+    
+    @objc func viewDidEnterBackground(_ notification: Notification) {
+        if self.isViewLoaded && self.view.window != nil {
+            print("バックグラウンド")
+        }
     }
 }
 
