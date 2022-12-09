@@ -13,7 +13,7 @@ class SimpleApplicationTests: XCTestCase {
     let mock = WeatherModelMock()
     override func setUp() {
         super.setUp()
-        weatherViewController = WeatherViewController.getNextViewController(weatherModel: mock)
+        weatherViewController = WeatherViewController.getWeatherViewControllerInstance(weatherModel: mock)
         weatherViewController.loadViewIfNeeded()
     }
     
@@ -21,33 +21,44 @@ class SimpleApplicationTests: XCTestCase {
         super.tearDown()
     }
     
-    func test晴れであることを確認する() {
-        let weather = "sunny"
-        mock.weather = weather
-        mock.fetchWeather()
-        XCTAssertEqual(weatherViewController.weatherImage.image, UIImage(named: weather)?.withRenderingMode(.alwaysTemplate))
+    // MARK: - Case Image
+    
+    private func testSunny() {
+        compareWithImage(weatherCondition: "sunny")
     }
     
-    func test曇りであることを確認する() {
-        let weather = "cloudy"
-        mock.weather = weather
-        mock.fetchWeather()
-        XCTAssertEqual(weatherViewController.weatherImage.image, UIImage(named: weather)?.withRenderingMode(.alwaysTemplate))
+    private func testCloudy() {
+        compareWithImage(weatherCondition: "cloudy")
     }
     
-    func test雨であることを確認する() {
-        let weather = "rainy"
-        mock.weather = weather
+    private func testRainy() {
+        compareWithImage(weatherCondition: "rainy")
+    }
+    
+    private func compareWithImage(weatherCondition: String) {
+        mock.weatherCondition = weatherCondition
         mock.fetchWeather()
-        XCTAssertEqual(weatherViewController.weatherImage.image, UIImage(named: weather)?.withRenderingMode(.alwaysTemplate))
+        XCTAssertEqual(weatherViewController.weatherImage.image, UIImage(named: weatherCondition)?.withRenderingMode(.alwaysTemplate))
+    }
+    
+    // MARK: - Case Label
+    
+    private func testMaxTemperature() {
+        mock.fetchWeather()
+        XCTAssertEqual(Int(weatherViewController.maxTemperature.text!), 25)
+    }
+    
+    private func testMinTemperature() {
+        mock.fetchWeather()
+        XCTAssertEqual(Int(weatherViewController.minTemperature.text!), 7)
     }
 }
 
 class WeatherModelMock: WeatherModel {
     weak var delegate: WeatherModelDelegate?
-    var weather: String = ""
+    var weatherCondition: String = ""
     
     func fetchWeather() {
-        delegate?.weatherModel(self, didFetchWeather: .init(maxTemperature: 25, date:"2020-04-01T12:00:00+09:00" , minTemperature: 7, weatherCondition: weather))
+        delegate?.weatherModel(self, didFetchWeather: .init(maxTemperature: 25, date:"2020-04-01T12:00:00+09:00" , minTemperature: 7, weatherCondition: weatherCondition))
     }
 }

@@ -17,7 +17,7 @@ final class EmptyViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard let safeNextVC = WeatherViewController.getNextViewController(weatherModel: WeatherModelImpl()) else { return }
+        guard let safeNextVC = WeatherViewController.getWeatherViewControllerInstance(weatherModel: WeatherModelImpl()) else { return }
         safeNextVC.modalPresentationStyle = .fullScreen
         present(safeNextVC, animated: true, completion: nil)
     }

@@ -12,10 +12,10 @@ class WeatherViewController: UIViewController {
     // MARK: - Properties
     private var weatherModel: WeatherModel
     @IBOutlet private(set) weak var weatherImage: UIImageView!
-    @IBOutlet private weak var maxTemperature: UILabel!
-    @IBOutlet private weak var minTemperature: UILabel!
+    @IBOutlet private(set) weak var maxTemperature: UILabel!
+    @IBOutlet private(set) weak var minTemperature: UILabel!
     
-    static func getNextViewController(weatherModel: WeatherModel) -> WeatherViewController? {
+    static func getWeatherViewControllerInstance(weatherModel: WeatherModel) -> WeatherViewController? {
         let storyboard = UIStoryboard(name: "WeatherView", bundle: nil)
         let nextVC = storyboard.instantiateInitialViewController { coder in
             WeatherViewController(coder: coder, weatherModel: weatherModel)
