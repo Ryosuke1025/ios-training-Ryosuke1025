@@ -23,15 +23,15 @@ class SimpleApplicationTests: XCTestCase {
     
     // MARK: - Case Image
     
-    private func testSunny() {
+    func testSunny() {
         compareWithImage(weatherCondition: "sunny")
     }
     
-    private func testCloudy() {
+    func testCloudy() {
         compareWithImage(weatherCondition: "cloudy")
     }
     
-    private func testRainy() {
+    func testRainy() {
         compareWithImage(weatherCondition: "rainy")
     }
     
@@ -43,12 +43,12 @@ class SimpleApplicationTests: XCTestCase {
     
     // MARK: - Case Label
     
-    private func testMaxTemperature() {
+    func testMaxTemperature() {
         mock.fetchWeather()
         XCTAssertEqual(Int(weatherViewController.maxTemperature.text!), 25)
     }
     
-    private func testMinTemperature() {
+    func testMinTemperature() {
         mock.fetchWeather()
         XCTAssertEqual(Int(weatherViewController.minTemperature.text!), 7)
     }
