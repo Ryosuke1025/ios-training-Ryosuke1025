@@ -25,7 +25,7 @@ final class WeatherModel {
         let encoder = JSONEncoder()
         let decoder = JSONDecoder()
         
-        let call = CallModel(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
+        let call = RequestModel(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
         guard let jsonData = try? encoder.encode(call) else {
             print("callからJSONデータへのエンコードに失敗しました")
             return
