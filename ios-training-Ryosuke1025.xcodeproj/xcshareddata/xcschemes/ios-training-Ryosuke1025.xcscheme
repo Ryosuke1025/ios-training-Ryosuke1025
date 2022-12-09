@@ -26,8 +26,31 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E31B1E45292C70A900C57E79"
+               BuildableName = "ios-training-Ryosuke1025Tests.xctest"
+               BlueprintName = "ios-training-Ryosuke1025Tests"
+               ReferencedContainer = "container:ios-training-Ryosuke1025.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E31B1E4F292C70A900C57E79"
+               BuildableName = "ios-training-Ryosuke1025UITests.xctest"
+               BlueprintName = "ios-training-Ryosuke1025UITests"
+               ReferencedContainer = "container:ios-training-Ryosuke1025.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

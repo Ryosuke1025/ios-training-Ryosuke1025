@@ -13,7 +13,12 @@ protocol WeatherModelDelegate: AnyObject {
     func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String)
 }
 
-final class WeatherModel {
+protocol WeatherModel {
+    var delegate: WeatherModelDelegate? { get set}
+    func fetchWeather()
+}
+
+final class WeatherModelImpl: WeatherModel {
     
     // MARK: - Properties
     

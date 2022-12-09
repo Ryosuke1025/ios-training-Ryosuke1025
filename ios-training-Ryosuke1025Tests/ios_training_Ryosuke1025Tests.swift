@@ -8,29 +8,46 @@
 import XCTest
 @testable import ios_training_Ryosuke1025
 
-final class ios_training_Ryosuke1025Tests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+class SimpleApplicationTests: XCTestCase {
+    var weatherViewController: WeatherViewController!
+    let mock = WeatherModelMock()
+    override func setUp() {
+        super.setUp()
+        weatherViewController = WeatherViewController.getInstance(weatherModel: mock)
+        weatherViewController.loadViewIfNeeded()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    override func tearDown() {
+        super.tearDown()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test晴れであることを確認する() {
+        var weather = "sunny"
+        mock.weather = weather
+        mock.fetchWeather()
+        XCTAssertEqual(weatherViewController.weatherImage.image, UIImage(named: weather)?.withRenderingMode(.alwaysTemplate))
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test曇りであることを確認する() {
+        var weather = "cloudy"
+        mock.weather = weather
+        mock.fetchWeather()
+        XCTAssertEqual(weatherViewController.weatherImage.image, UIImage(named: weather)?.withRenderingMode(.alwaysTemplate))
     }
+    
+    func test雨であることを確認する() {
+        var weather = "rainy"
+        mock.weather = weather
+        mock.fetchWeather()
+        XCTAssertEqual(weatherViewController.weatherImage.image, UIImage(named: weather)?.withRenderingMode(.alwaysTemplate))
+    }
+}
 
+class WeatherModelMock: WeatherModel {
+    weak var delegate: WeatherModelDelegate?
+    var weather: String = ""
+    
+    func fetchWeather() {
+        delegate?.weatherModel(self, didFetchWeather: .init(maxTemperature: 25, date:"2020-04-01T12:00:00+09:00" , minTemperature: 7, weatherCondition: weather))
+    }
 }

@@ -7,14 +7,30 @@
 
 import UIKit
 
-final class WeatherViewController: UIViewController {
+class WeatherViewController: UIViewController {
     
     // MARK: - Properties
-    
-    let weatherModel = WeatherModel()
-    @IBOutlet private weak var weatherImage: UIImageView!
+    private var weatherModel: WeatherModel
+    @IBOutlet private(set) weak var weatherImage: UIImageView!
     @IBOutlet private weak var maxTemperature: UILabel!
     @IBOutlet private weak var minTemperature: UILabel!
+    
+    static func getInstance(weatherModel: WeatherModel) -> WeatherViewController? {
+        let storyboard = UIStoryboard(name: "WeatherView", bundle: nil)
+        let nextVC = storyboard.instantiateInitialViewController() { coder in
+            WeatherViewController(coder: coder, weatherModel: weatherModel)
+        }
+        return nextVC
+    }
+    
+    init?(coder: NSCoder, weatherModel: WeatherModel) {
+        self.weatherModel = weatherModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle
     
@@ -53,7 +69,6 @@ final class WeatherViewController: UIViewController {
     
     @objc func viewWillEnterForeground(_ notification: Notification) {
         if self.isViewLoaded && self.view.window != nil {
-            print("フォアグラウンド")
             weatherModel.fetchWeather()
         }
     }
