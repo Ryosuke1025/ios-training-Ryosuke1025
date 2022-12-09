@@ -25,24 +25,24 @@ final class WeatherModel {
         let encoder = JSONEncoder()
         let decoder = JSONDecoder()
         
-        let call = RequestModel(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
-        guard let jsonData = try? encoder.encode(call) else {
-            print("callからJSONデータへのエンコードに失敗しました")
+        let request = RequestModel(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
+        guard let jsonData = try? encoder.encode(request) else {
+            assertionFailure("requestからJSONデータへのエンコードに失敗しました")
             return
         }
         guard let jsonString = String(data: jsonData, encoding: .utf8) else {
-            print("データ型からString型への変換に失敗しました")
+            assertionFailure("データ型からString型への変換に失敗しました")
             return
         }
         do {
             let weatherJson = try YumemiWeather.fetchWeather(jsonString)
             guard let jsonData = weatherJson.data(using: .utf8) else {
-                print("受け取ったString型からデータ型への変換に失敗しました")
+                assertionFailure("受け取ったString型からデータ型への変換に失敗しました")
                 return
             }
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             guard let weather = try? decoder.decode(ResponseModel.self, from: jsonData) else {
-                print("ResponseModelへのデコードに失敗しました")
+                assertionFailure("ResponseModelへのデコードに失敗しました")
                 return
             }
             delegate?.weatherModel(self, didFetchWeather: weather)
