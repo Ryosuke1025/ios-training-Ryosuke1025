@@ -15,9 +15,9 @@ class WeatherViewController: UIViewController {
     @IBOutlet private weak var maxTemperature: UILabel!
     @IBOutlet private weak var minTemperature: UILabel!
     
-    static func getInstance(weatherModel: WeatherModel) -> WeatherViewController? {
+    static func getNextViewController(weatherModel: WeatherModel) -> WeatherViewController? {
         let storyboard = UIStoryboard(name: "WeatherView", bundle: nil)
-        let nextVC = storyboard.instantiateInitialViewController() { coder in
+        let nextVC = storyboard.instantiateInitialViewController { coder in
             WeatherViewController(coder: coder, weatherModel: weatherModel)
         }
         return nextVC
@@ -28,6 +28,7 @@ class WeatherViewController: UIViewController {
         super.init(coder: coder)
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

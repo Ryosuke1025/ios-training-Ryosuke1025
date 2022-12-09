@@ -13,7 +13,7 @@ class SimpleApplicationTests: XCTestCase {
     let mock = WeatherModelMock()
     override func setUp() {
         super.setUp()
-        weatherViewController = WeatherViewController.getInstance(weatherModel: mock)
+        weatherViewController = WeatherViewController.getNextViewController(weatherModel: mock)
         weatherViewController.loadViewIfNeeded()
     }
     
@@ -22,21 +22,21 @@ class SimpleApplicationTests: XCTestCase {
     }
     
     func test晴れであることを確認する() {
-        var weather = "sunny"
+        let weather = "sunny"
         mock.weather = weather
         mock.fetchWeather()
         XCTAssertEqual(weatherViewController.weatherImage.image, UIImage(named: weather)?.withRenderingMode(.alwaysTemplate))
     }
     
     func test曇りであることを確認する() {
-        var weather = "cloudy"
+        let weather = "cloudy"
         mock.weather = weather
         mock.fetchWeather()
         XCTAssertEqual(weatherViewController.weatherImage.image, UIImage(named: weather)?.withRenderingMode(.alwaysTemplate))
     }
     
     func test雨であることを確認する() {
-        var weather = "rainy"
+        let weather = "rainy"
         mock.weather = weather
         mock.fetchWeather()
         XCTAssertEqual(weatherViewController.weatherImage.image, UIImage(named: weather)?.withRenderingMode(.alwaysTemplate))

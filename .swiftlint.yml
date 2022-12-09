@@ -84,7 +84,7 @@ disabled_rules:
 opt_in_rules:
   - anyobject_protocol
   - array_init
-  - attributes
+  #- attributes # @objcは横につけたいから
   - closure_body_length
   - closure_end_indentation
   - closure_spacing
