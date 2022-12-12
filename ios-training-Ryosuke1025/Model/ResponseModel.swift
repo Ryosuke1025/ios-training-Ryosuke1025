@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ResponseModel: Codable {
+struct ResponseModel: Codable, Equatable {
     let maxTemperature: Int
     let date: String
     let minTemperature: Int

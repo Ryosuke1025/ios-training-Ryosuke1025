@@ -56,14 +56,31 @@ class SimpleApplicationTests: XCTestCase {
     // MARK: - Case Json
     
     func testEncode() {
-        let request = RequestModel(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
-        XCTAssertEqual()
+        let area = "tokyo"
+        let date = "2020-04-01T12:00:00+09:00"
+        let request = RequestModel(area: area, date: date)
+        let expect = """
+        {
+            "area": "\(area)",
+            "date": "\(date)"
+        }
+        """.data(using: .utf8)!
+        XCTAssertEqual(mock.encode(request: request), expect)
     }
     
     func testDecode() {
-        let jsonData =
-        XCTAssertEqual()
+        let responseData = """
+        {
+            "maxTemperature": 25,
+            "date": "2020-04-01T12:00:00+09:00",
+            "minTemperature": 7,
+            "weatherCondition": "Sunny"
+        }
+        """.data(using: .utf8)!
+        let expect = ResponseModel(maxTemperature: 25, date: "2020-04-01T12:00:00+09:00", minTemperature: 7, weatherCondition: "Sunny")
+        XCTAssertEqual(mock.decode(responseData: responseData), expect)
     }
+}
 
 class WeatherModelMock: WeatherModel {
     weak var delegate: WeatherModelDelegate?
@@ -75,18 +92,14 @@ class WeatherModelMock: WeatherModel {
     
     func encode(request: RequestModel) -> Data {
         let encoder = JSONEncoder()
-        guard let jsonData = try? encoder.encode(request) else {
-            fatalError("requestからJSONデータへのエンコードに失敗しました")
-        }
-        return jsonData
+        let requestData = try? encoder.encode(request)
+        return requestData!
     }
     
-    func decode(jsonData: Data) -> ResponseModel {
+    func decode(responseData: Data) -> ResponseModel {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        guard let weather = try? decoder.decode(ResponseModel.self, from: jsonData) else {
-            fatalError("ResponseModelへのデコードに失敗しました")
-        }
-        return weather
+        let response = try? decoder.decode(ResponseModel.self, from: responseData)
+        return response!
     }
 }
