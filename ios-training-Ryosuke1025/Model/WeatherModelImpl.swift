@@ -34,7 +34,7 @@ class WeatherModelImpl: WeatherModel {
             return
         }
         do {
-            let responseString = try YumemiWeather.fetchWeather(requestString)
+            let responseString = try YumemiWeather.syncFetchWeather(requestString)
             guard let responseData = responseString.data(using: .utf8) else {
                 assertionFailure("受け取ったString型からデータ型への変換に失敗しました")
                 return
