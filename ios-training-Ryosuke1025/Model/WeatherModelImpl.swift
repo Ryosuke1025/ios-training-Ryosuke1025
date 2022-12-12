@@ -16,6 +16,8 @@ protocol WeatherModelDelegate: AnyObject {
 protocol WeatherModel {
     var delegate: WeatherModelDelegate? { get set}
     func fetchWeather()
+    func encode(request: RequestModel) -> Data
+    func decode(jsonData: Data) -> ResponseModel
 }
 
 final class WeatherModelImpl: WeatherModel {
@@ -27,14 +29,8 @@ final class WeatherModelImpl: WeatherModel {
     // MARK: - Methods
     
     func fetchWeather() {
-        let encoder = JSONEncoder()
-        let decoder = JSONDecoder()
-        
         let request = RequestModel(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
-        guard let jsonData = try? encoder.encode(request) else {
-            assertionFailure("requestからJSONデータへのエンコードに失敗しました")
-            return
-        }
+        let jsonData = encode(request: request)
         guard let jsonString = String(data: jsonData, encoding: .utf8) else {
             assertionFailure("データ型からString型への変換に失敗しました")
             return
@@ -45,11 +41,7 @@ final class WeatherModelImpl: WeatherModel {
                 assertionFailure("受け取ったString型からデータ型への変換に失敗しました")
                 return
             }
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            guard let weather = try? decoder.decode(ResponseModel.self, from: jsonData) else {
-                assertionFailure("ResponseModelへのデコードに失敗しました")
-                return
-            }
+            let weather = decode(jsonData: jsonData)
             delegate?.weatherModel(self, didFetchWeather: weather)
         } catch let error as YumemiWeatherError {
             switch error {
@@ -61,5 +53,22 @@ final class WeatherModelImpl: WeatherModel {
         } catch {
             delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
         }
+    }
+    
+    func encode(request: RequestModel) -> Data {
+        let encoder = JSONEncoder()
+        guard let jsonData = try? encoder.encode(request) else {
+            fatalError("requestからJSONデータへのエンコードに失敗しました")
+        }
+        return jsonData
+    }
+    
+    func decode(jsonData: Data) -> ResponseModel {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        guard let weather = try? decoder.decode(ResponseModel.self, from: jsonData) else {
+            fatalError("ResponseModelへのデコードに失敗しました")
+        }
+        return weather
     }
 }

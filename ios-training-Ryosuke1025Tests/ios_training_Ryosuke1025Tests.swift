@@ -52,7 +52,16 @@ class SimpleApplicationTests: XCTestCase {
         mock.fetchWeather()
         XCTAssertEqual(Int(weatherViewController.minTemperature.text!), 7)
     }
-}
+    
+    // MARK: - Case Json
+    
+    func testEncode() {
+        
+    }
+    
+    func testDecode() {
+        
+    }
 
 class WeatherModelMock: WeatherModel {
     weak var delegate: WeatherModelDelegate?
