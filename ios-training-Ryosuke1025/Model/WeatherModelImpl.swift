@@ -16,11 +16,9 @@ protocol WeatherModelDelegate: AnyObject {
 protocol WeatherModel {
     var delegate: WeatherModelDelegate? { get set}
     func fetchWeather()
-    func encode(request: RequestModel) -> Data
-    func decode(responseData: Data) -> ResponseModel
 }
 
-final class WeatherModelImpl: WeatherModel {
+class WeatherModelImpl: WeatherModel {
     
     // MARK: - Properties
     
@@ -57,6 +55,7 @@ final class WeatherModelImpl: WeatherModel {
     
     func encode(request: RequestModel) -> Data {
         let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
         guard let requestData = try? encoder.encode(request) else {
             fatalError("requestからJSONデータへのエンコードに失敗しました")
         }

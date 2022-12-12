@@ -8,7 +8,7 @@
 import XCTest
 @testable import ios_training_Ryosuke1025
 
-class SimpleApplicationTests: XCTestCase {
+class WeatherViewControllerTest: XCTestCase {
     var weatherViewController: WeatherViewController!
     let mock = WeatherModelMock()
     override func setUp() {
@@ -19,6 +19,7 @@ class SimpleApplicationTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
+        weatherViewController  = nil
     }
     
     // MARK: - Case Image
@@ -53,33 +54,7 @@ class SimpleApplicationTests: XCTestCase {
         XCTAssertEqual(Int(weatherViewController.minTemperature.text!), 7)
     }
     
-    // MARK: - Case Json
     
-    func testEncode() {
-        let area = "tokyo"
-        let date = "2020-04-01T12:00:00+09:00"
-        let request = RequestModel(area: area, date: date)
-        let expect = """
-        {
-            "area": "\(area)",
-            "date": "\(date)"
-        }
-        """.data(using: .utf8)!
-        XCTAssertEqual(mock.encode(request: request), expect)
-    }
-    
-    func testDecode() {
-        let responseData = """
-        {
-            "maxTemperature": 25,
-            "date": "2020-04-01T12:00:00+09:00",
-            "minTemperature": 7,
-            "weatherCondition": "Sunny"
-        }
-        """.data(using: .utf8)!
-        let expect = ResponseModel(maxTemperature: 25, date: "2020-04-01T12:00:00+09:00", minTemperature: 7, weatherCondition: "Sunny")
-        XCTAssertEqual(mock.decode(responseData: responseData), expect)
-    }
 }
 
 class WeatherModelMock: WeatherModel {
@@ -88,18 +63,5 @@ class WeatherModelMock: WeatherModel {
     
     func fetchWeather() {
         delegate?.weatherModel(self, didFetchWeather: .init(maxTemperature: 25, date:"2020-04-01T12:00:00+09:00" , minTemperature: 7, weatherCondition: weatherCondition))
-    }
-    
-    func encode(request: RequestModel) -> Data {
-        let encoder = JSONEncoder()
-        let requestData = try? encoder.encode(request)
-        return requestData!
-    }
-    
-    func decode(responseData: Data) -> ResponseModel {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let response = try? decoder.decode(ResponseModel.self, from: responseData)
-        return response!
     }
 }
