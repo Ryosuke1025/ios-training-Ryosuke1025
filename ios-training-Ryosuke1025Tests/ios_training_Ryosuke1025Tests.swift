@@ -56,11 +56,13 @@ class SimpleApplicationTests: XCTestCase {
     // MARK: - Case Json
     
     func testEncode() {
-        
+        let request = RequestModel(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
+        XCTAssertEqual()
     }
     
     func testDecode() {
-        
+        let jsonData =
+        XCTAssertEqual()
     }
 
 class WeatherModelMock: WeatherModel {
@@ -69,5 +71,22 @@ class WeatherModelMock: WeatherModel {
     
     func fetchWeather() {
         delegate?.weatherModel(self, didFetchWeather: .init(maxTemperature: 25, date:"2020-04-01T12:00:00+09:00" , minTemperature: 7, weatherCondition: weatherCondition))
+    }
+    
+    func encode(request: RequestModel) -> Data {
+        let encoder = JSONEncoder()
+        guard let jsonData = try? encoder.encode(request) else {
+            fatalError("requestからJSONデータへのエンコードに失敗しました")
+        }
+        return jsonData
+    }
+    
+    func decode(jsonData: Data) -> ResponseModel {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        guard let weather = try? decoder.decode(ResponseModel.self, from: jsonData) else {
+            fatalError("ResponseModelへのデコードに失敗しました")
+        }
+        return weather
     }
 }
