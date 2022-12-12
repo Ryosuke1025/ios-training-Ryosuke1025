@@ -15,12 +15,12 @@ class WeatherViewController: UIViewController {
     @IBOutlet private(set) weak var maxTemperature: UILabel!
     @IBOutlet private(set) weak var minTemperature: UILabel!
     
-    static func getWeatherViewControllerInstance(weatherModel: WeatherModel) -> WeatherViewController? {
+    static func getInstance(weatherModel: WeatherModel) -> WeatherViewController? {
         let storyboard = UIStoryboard(name: "WeatherView", bundle: nil)
-        let nextVC = storyboard.instantiateInitialViewController { coder in
+        let weatherViewController = storyboard.instantiateInitialViewController { coder in
             WeatherViewController(coder: coder, weatherModel: weatherModel)
         }
-        return nextVC
+        return weatherViewController
     }
     
     init?(coder: NSCoder, weatherModel: WeatherModel) {
@@ -42,7 +42,7 @@ class WeatherViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNotificasion()
+        setNotification()
     }
     
     // MARK: - Actions
@@ -63,7 +63,7 @@ class WeatherViewController: UIViewController {
     
     // MARK: - Notification Center
     
-    func setNotificasion() {
+    private func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(viewWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(viewDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
