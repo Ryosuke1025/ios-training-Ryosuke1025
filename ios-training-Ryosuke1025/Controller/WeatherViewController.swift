@@ -15,11 +15,16 @@ class WeatherViewController: UIViewController {
     @IBOutlet private(set) weak var weatherImage: UIImageView!
     @IBOutlet private(set) weak var maxTemperature: UILabel!
     @IBOutlet private(set) weak var minTemperature: UILabel!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView! {
+        didSet {
+            indicator.hidesWhenStopped = true
+        }
+    }
     
     // MARK: - Actions
     
     @IBAction private func reloadWeatherImage(_ sender: Any) {
+        indicator.startAnimating()
         weatherModel.fetchWeather()
     }
     
@@ -112,11 +117,14 @@ extension WeatherViewController: WeatherModelDelegate {
         
         maxTemperature.text = String(weather.maxTemperature)
         minTemperature.text = String(weather.minTemperature)
+        
+        indicator.stopAnimating()
     }
     
     func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String) {
         let alertController = UIAlertController(title: "エラーが発生しました", message: error, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        indicator.stopAnimating()
         present(alertController, animated: true, completion: nil)
     }
 }
