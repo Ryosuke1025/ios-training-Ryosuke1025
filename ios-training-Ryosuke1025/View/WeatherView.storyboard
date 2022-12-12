@@ -89,6 +89,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="indicator" destination="w3h-7l-nSX" id="pDi-Z5-oID"/>
                         <outlet property="maxTemperature" destination="rI3-nU-aal" id="yRx-Dm-pAu"/>
                         <outlet property="minTemperature" destination="7xr-8D-aMy" id="gEn-aK-iHx"/>
                         <outlet property="weatherImage" destination="dkn-EE-RcG" id="TKl-MU-r2L"/>

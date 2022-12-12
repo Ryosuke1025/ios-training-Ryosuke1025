@@ -10,10 +10,24 @@ import UIKit
 class WeatherViewController: UIViewController {
     
     // MARK: - Properties
+    
     private var weatherModel: WeatherModel
     @IBOutlet private(set) weak var weatherImage: UIImageView!
     @IBOutlet private(set) weak var maxTemperature: UILabel!
     @IBOutlet private(set) weak var minTemperature: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
+    // MARK: - Actions
+    
+    @IBAction private func reloadWeatherImage(_ sender: Any) {
+        weatherModel.fetchWeather()
+    }
+    
+    @IBAction private func close(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    // MARK: - Self Instance
     
     static func getInstance(weatherModel: WeatherModel) -> WeatherViewController? {
         let storyboard = UIStoryboard(name: "WeatherView", bundle: nil)
@@ -23,6 +37,8 @@ class WeatherViewController: UIViewController {
         return weatherViewController
     }
     
+    // MARK: - Init
+    
     init?(coder: NSCoder, weatherModel: WeatherModel) {
         self.weatherModel = weatherModel
         super.init(coder: coder)
@@ -31,6 +47,12 @@ class WeatherViewController: UIViewController {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Deinit
+    
+    deinit {
+        print("WeatherViewController is deinit")
     }
     
     // MARK: - Life Cycle
@@ -43,22 +65,6 @@ class WeatherViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNotification()
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction private func reloadWeatherImage(_ sender: Any) {
-        weatherModel.fetchWeather()
-    }
-    
-    @IBAction private func close(_ sender: Any) {
-        self.dismiss(animated: true)
-    }
-    
-    // MARK: - Deinit
-    
-    deinit {
-        print("WeatherViewController is deinit")
     }
     
     // MARK: - Notification Center
