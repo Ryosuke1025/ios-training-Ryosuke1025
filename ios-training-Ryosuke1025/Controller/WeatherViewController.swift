@@ -15,7 +15,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet private(set) weak var weatherImage: UIImageView!
     @IBOutlet private(set) weak var maxTemperature: UILabel!
     @IBOutlet private(set) weak var minTemperature: UILabel!
-    @IBOutlet weak var indicator: UIActivityIndicatorView! {
+    @IBOutlet private weak var indicator: UIActivityIndicatorView! {
         didSet {
             indicator.hidesWhenStopped = true
         }
@@ -24,7 +24,7 @@ class WeatherViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction private func reloadWeatherImage(_ sender: Any) {
-        indicator.startAnimating()
+        self.indicator.startAnimating()
         weatherModel.fetchWeather()
     }
     
@@ -97,34 +97,38 @@ extension WeatherViewController: WeatherModelDelegate {
     // MARK: - Methods
     
     func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: ResponseModel) {
-        switch weather.weatherCondition {
-        case "sunny":
-            weatherImage.tintColor = .systemRed
-            weatherImage.image = UIImage(named: "sunny")?.withRenderingMode(.alwaysTemplate)
-        
-        case "cloudy":
-            weatherImage.tintColor = .systemGray
-            weatherImage.image = UIImage(named: "cloudy")?.withRenderingMode(.alwaysTemplate)
-        
-        case "rainy":
-            weatherImage.tintColor = .systemBlue
-            weatherImage.image = UIImage(named: "rainy")?.withRenderingMode(.alwaysTemplate)
-        
-        default:
-            weatherImage.tintColor = .systemPurple
-            weatherImage.image = UIImage(named: "question")?.withRenderingMode(.alwaysTemplate)
+        DispatchQueue.main.async {
+            switch weather.weatherCondition {
+            case "sunny":
+                self.weatherImage.tintColor = .systemRed
+                self.weatherImage.image = UIImage(named: "sunny")?.withRenderingMode(.alwaysTemplate)
+            
+            case "cloudy":
+                self.weatherImage.tintColor = .systemGray
+                self.weatherImage.image = UIImage(named: "cloudy")?.withRenderingMode(.alwaysTemplate)
+            
+            case "rainy":
+                self.weatherImage.tintColor = .systemBlue
+                self.weatherImage.image = UIImage(named: "rainy")?.withRenderingMode(.alwaysTemplate)
+            
+            default:
+                self.weatherImage.tintColor = .systemPurple
+                self.weatherImage.image = UIImage(named: "question")?.withRenderingMode(.alwaysTemplate)
+            }
+            
+            self.maxTemperature.text = String(weather.maxTemperature)
+            self.minTemperature.text = String(weather.minTemperature)
+            
+            self.indicator.stopAnimating()
         }
-        
-        maxTemperature.text = String(weather.maxTemperature)
-        minTemperature.text = String(weather.minTemperature)
-        
-        indicator.stopAnimating()
     }
     
     func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String) {
-        let alertController = UIAlertController(title: "エラーが発生しました", message: error, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        indicator.stopAnimating()
-        present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "エラーが発生しました", message: error, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.indicator.stopAnimating()
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 }

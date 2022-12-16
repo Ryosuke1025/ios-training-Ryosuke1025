@@ -13,7 +13,7 @@ class WeatherViewControllerTest: XCTestCase {
     let mock = WeatherModelMock()
     override func setUp() {
         super.setUp()
-        weatherViewController = WeatherViewController.getWeatherViewControllerInstance(weatherModel: mock)
+        weatherViewController = WeatherViewController.getInstance(weatherModel: mock)
         weatherViewController.loadViewIfNeeded()
     }
     
@@ -53,8 +53,6 @@ class WeatherViewControllerTest: XCTestCase {
         mock.fetchWeather()
         XCTAssertEqual(Int(weatherViewController.minTemperature.text!), 7)
     }
-    
-    
 }
 
 class WeatherModelMock: WeatherModel {

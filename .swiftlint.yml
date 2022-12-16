@@ -104,7 +104,7 @@ opt_in_rules:
   #- explicit_self # 関数は `self.` を付けずに呼び出したいため
   #- explicit_top_level_acl # できる限りACLを省略したいため
   #- explicit_type_interface # できる限り型推論したいため
-  - extension_access_modifier
+  #- extension_access_modifier #extensionに修飾子を付ける意味が分らないため
   - fallthrough
   - fatal_error_message
   #- file_header # このルールの意味を理解していないため
@@ -159,7 +159,7 @@ opt_in_rules:
   #- strong_iboutlet # `@IBOutlet` を `weak` で定義したいこともあるため
   - switch_case_on_newline
   - toggle_bool
-  - trailing_closure
+  #- trailing_closure #completionHandlerを扱うため
   - unavailable_function
   #- unneeded_parentheses_in_closure_argument #括弧を使う方が見やすいため
   - untyped_error_in_catch
