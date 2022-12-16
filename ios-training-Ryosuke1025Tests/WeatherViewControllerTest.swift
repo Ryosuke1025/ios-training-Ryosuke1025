@@ -44,17 +44,17 @@ class WeatherViewControllerTest: XCTestCase {
     
     // MARK: - Case Label
     
-    func testMaxTemperature() {
+    func testMaxTemperature() throws {
         mock.fetchWeather()
-        XCTAssertEqual(weatherViewController.maxTemperature.text!, "25")
+        let maxTemperatureText = try XCTUnwrap(weatherViewController.maxTemperature.text)
+        XCTAssertEqual(maxTemperatureText, "25")
     }
     
-    func testMinTemperature() {
+    func testMinTemperature() throws {
         mock.fetchWeather()
+        let minTemperatureText = try XCTUnwrap(weatherViewController.minTemperature.text)
         XCTAssertEqual(weatherViewController.minTemperature.text!, "7")
     }
-    
-    
 }
 
 class WeatherModelMock: WeatherModel {
