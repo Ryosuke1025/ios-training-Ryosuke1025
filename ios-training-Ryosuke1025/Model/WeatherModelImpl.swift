@@ -18,7 +18,7 @@ protocol WeatherModel {
     func fetchWeather()
 }
 
-class WeatherModelImpl: WeatherModel {
+final class WeatherModelImpl: WeatherModel {
     
     // MARK: - Properties
     
