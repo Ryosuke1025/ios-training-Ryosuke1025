@@ -9,16 +9,16 @@ import XCTest
 @testable import ios_training_Ryosuke1025
 
 class WeatherModelImplTest: XCTestCase {
-    var weatehrModelImpl: WeatherModelImpl!
+    var weatherModelImpl: WeatherModelImpl!
     
     override func setUp() {
         super.setUp()
-        weatehrModelImpl = WeatherModelImpl()
+        weatherModelImpl = WeatherModelImpl()
     }
     
     override func tearDown() {
         super.tearDown()
-        weatehrModelImpl = nil
+        weatherModelImpl = nil
     }
 
     // MARK: - Case Json
@@ -28,7 +28,7 @@ class WeatherModelImplTest: XCTestCase {
         let date = "2020-04-01T12:00:00+09:00"
         let request = RequestModel(area: area, date: date)
         let expect = #"{"area":"\#(area)","date":"\#(date)"}"#.data(using: .utf8)!
-        XCTAssertEqual(weatehrModelImpl.encode(request: request), expect)
+        XCTAssertEqual(weatherModelImpl.encode(request: request), expect)
     }
     
     func testDecode() {
@@ -41,6 +41,6 @@ class WeatherModelImplTest: XCTestCase {
         }
         """.data(using: .utf8)!
         let expect = ResponseModel(maxTemperature: 25, date: "2020-04-01T12:00:00+09:00", minTemperature: 7, weatherCondition: "Sunny")
-        XCTAssertEqual(weatehrModelImpl.decode(responseData: responseData), expect)
+        XCTAssertEqual(weatherModelImpl.decode(responseData: responseData), expect)
     }
 }
