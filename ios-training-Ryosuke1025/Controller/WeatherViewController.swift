@@ -25,7 +25,7 @@ class WeatherViewController: UIViewController {
     
     @IBAction private func reloadWeatherImage(_ sender: Any) {
         self.indicator.startAnimating()
-        weatherModel.fetchWeather()
+        self.updateWeather()
     }
     
     @IBAction private func close(_ sender: Any) {
@@ -64,7 +64,6 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weatherModel.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,7 +80,7 @@ class WeatherViewController: UIViewController {
     
     @objc func viewWillEnterForeground(_ notification: Notification) {
         if self.isViewLoaded && self.view.window != nil {
-            weatherModel.fetchWeather()
+            self.updateWeather()
         }
     }
     
@@ -90,45 +89,47 @@ class WeatherViewController: UIViewController {
             print("バックグラウンド")
         }
     }
-}
-
-extension WeatherViewController: WeatherModelDelegate {
     
-    // MARK: - Methods
-    
-    func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: ResponseModel) {
-        DispatchQueue.main.async {
-            switch weather.weatherCondition {
-            case "sunny":
-                self.weatherImage.tintColor = .systemRed
-                self.weatherImage.image = UIImage(named: "sunny")?.withRenderingMode(.alwaysTemplate)
-            
-            case "cloudy":
-                self.weatherImage.tintColor = .systemGray
-                self.weatherImage.image = UIImage(named: "cloudy")?.withRenderingMode(.alwaysTemplate)
-            
-            case "rainy":
-                self.weatherImage.tintColor = .systemBlue
-                self.weatherImage.image = UIImage(named: "rainy")?.withRenderingMode(.alwaysTemplate)
-            
-            default:
-                self.weatherImage.tintColor = .systemPurple
-                self.weatherImage.image = UIImage(named: "question")?.withRenderingMode(.alwaysTemplate)
+    func updateWeather() {
+        WeatherModel().fetchWeather(completionHandler: { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    switch response.weatherCondition {
+                    case "sunny":
+                        self.weatherImage.tintColor = .systemRed
+                        self.weatherImage.image = UIImage(named: "sunny")?.withRenderingMode(.alwaysTemplate)
+                    case "cloudy":
+                        self.weatherImage.tintColor = .systemGray
+                        self.weatherImage.image = UIImage(named: "cloudy")?.withRenderingMode(.alwaysTemplate)
+                        
+                    case "rainy":
+                        self.weatherImage.tintColor = .systemBlue
+                        self.weatherImage.image = UIImage(named: "rainy")?.withRenderingMode(.alwaysTemplate)
+                        
+                    default:
+                        self.weatherImage.tintColor = .systemPurple
+                        self.weatherImage.image = UIImage(named: "question")?.withRenderingMode(.alwaysTemplate)
+                    }
+                    self.maxTemperature.text = String(response.maxTemperature)
+                    self.minTemperature.text = String(response.minTemperature)
+                case .failure(let error):
+                    let errorMessage: String
+                    switch error {
+                    case APIError.invalidParameter:
+                        errorMessage = "もう一度reloadボタンをタップしてください"
+                    case APIError.unknown:
+                        errorMessage = "予期しないエラーが発生しました"
+                    default:
+                        errorMessage = "予期しないエラーが発生しました"
+                    }
+                    let alertController = UIAlertController(title: "エラーが発生しました", message: errorMessage, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                self.indicator.stopAnimating()
             }
-            
-            self.maxTemperature.text = String(weather.maxTemperature)
-            self.minTemperature.text = String(weather.minTemperature)
-            
-            self.indicator.stopAnimating()
-        }
-    }
-    
-    func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(title: "エラーが発生しました", message: error, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.indicator.stopAnimating()
-            self.present(alertController, animated: true, completion: nil)
-        }
+        })
     }
 }
