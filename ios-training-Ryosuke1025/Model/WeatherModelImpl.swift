@@ -33,24 +33,30 @@ final class WeatherModelImpl: WeatherModel {
             assertionFailure("データ型からString型への変換に失敗しました")
             return
         }
-        do {
-            let responseString = try YumemiWeather.fetchWeather(requestString)
-            guard let responseData = responseString.data(using: .utf8) else {
-                assertionFailure("受け取ったString型からデータ型への変換に失敗しました")
-                return
+        YumemiWeather.asyncFetchWeather(requestString: requestString, completionHandler: { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let responseString):
+                guard let responseData = responseString.data(using: .utf8) else {
+                    assertionFailure("受け取ったString型からデータ型への変換に失敗しました")
+                    return
+                }
+                let response = self.decode(responseData: responseData)
+                
+                self.delegate?.weatherModel(self, didFetchWeather: response)
+            case .failure(let error):
+                if let error = error as? YumemiWeatherError {
+                    switch error {
+                    case .invalidParameterError:
+                        self.delegate?.weatherModel(self, didOccurError: "jsonのパースに失敗しました")
+                    case .unknownError:
+                        self.delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
+                    }
+                } else {
+                    self.delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
+                }
             }
-            let response = decode(responseData: responseData)
-            delegate?.weatherModel(self, didFetchWeather: response)
-        } catch let error as YumemiWeatherError {
-            switch error {
-            case .invalidParameterError:
-                delegate?.weatherModel(self, didOccurError: "jsonのパースに失敗しました")
-            case .unknownError:
-                delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
-            }
-        } catch {
-            delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
-        }
+        })
     }
     
     func encode(request: RequestModel) -> Data {

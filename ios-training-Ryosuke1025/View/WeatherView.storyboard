@@ -69,20 +69,27 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="w3h-7l-nSX">
+                                <rect key="frame" x="186.66666666666666" y="544.33333333333337" width="20" height="60"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="w3h-7l-nSX" firstAttribute="top" secondItem="cRS-ne-CJW" secondAttribute="bottom" constant="10" id="5Le-EG-TA2"/>
                             <constraint firstItem="YMt-yI-Gd4" firstAttribute="centerX" secondItem="rI3-nU-aal" secondAttribute="centerX" id="Myb-Tw-gP9"/>
                             <constraint firstItem="cRS-ne-CJW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="YrA-kG-5dr"/>
                             <constraint firstItem="dkn-EE-RcG" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="gJI-ev-wbJ"/>
+                            <constraint firstItem="w3h-7l-nSX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lMp-NQ-MG5"/>
                             <constraint firstItem="cRS-ne-CJW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="loq-XS-dHw"/>
+                            <constraint firstItem="Ulo-oB-808" firstAttribute="top" secondItem="w3h-7l-nSX" secondAttribute="bottom" constant="10" id="lx6-J5-fMD"/>
                             <constraint firstItem="Ulo-oB-808" firstAttribute="top" secondItem="cRS-ne-CJW" secondAttribute="bottom" constant="80" id="oqG-C0-cH1"/>
                             <constraint firstItem="Ulo-oB-808" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pNR-dc-16U"/>
                             <constraint firstItem="Zfb-L3-7Ux" firstAttribute="centerX" secondItem="7xr-8D-aMy" secondAttribute="centerX" id="puu-L5-hA6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="indicator" destination="w3h-7l-nSX" id="pDi-Z5-oID"/>
                         <outlet property="maxTemperature" destination="rI3-nU-aal" id="yRx-Dm-pAu"/>
                         <outlet property="minTemperature" destination="7xr-8D-aMy" id="gEn-aK-iHx"/>
                         <outlet property="weatherImage" destination="dkn-EE-RcG" id="TKl-MU-r2L"/>
