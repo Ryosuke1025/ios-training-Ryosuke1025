@@ -53,7 +53,7 @@ class WeatherViewControllerTest: XCTestCase {
     func testMinTemperature() throws {
         mock.fetchWeather()
         let minTemperatureText = try XCTUnwrap(weatherViewController.minTemperature.text)
-        XCTAssertEqual(weatherViewController.minTemperature.text!, "7")
+        XCTAssertEqual(minTemperatureText, "7")
     }
 }
 
