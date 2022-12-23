@@ -10,11 +10,28 @@ import UIKit
 final class WeatherViewController: UIViewController {
     
     // MARK: - Properties
+    private var weatherModel: WeatherModel
+    @IBOutlet private(set) weak var weatherImage: UIImageView!
+    @IBOutlet private(set) weak var maxTemperature: UILabel!
+    @IBOutlet private(set) weak var minTemperature: UILabel!
     
-    let weatherModel = WeatherModel()
-    @IBOutlet private weak var weatherImage: UIImageView!
-    @IBOutlet private weak var maxTemperature: UILabel!
-    @IBOutlet private weak var minTemperature: UILabel!
+    static func getInstance(weatherModel: WeatherModel) -> WeatherViewController? {
+        let storyboard = UIStoryboard(name: "WeatherView", bundle: nil)
+        let weatherViewController = storyboard.instantiateInitialViewController { coder in
+            WeatherViewController(coder: coder, weatherModel: weatherModel)
+        }
+        return weatherViewController
+    }
+    
+    init?(coder: NSCoder, weatherModel: WeatherModel) {
+        self.weatherModel = weatherModel
+        super.init(coder: coder)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle
     
@@ -25,7 +42,7 @@ final class WeatherViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNotificasion()
+        setNotification()
     }
     
     // MARK: - Actions
@@ -46,14 +63,13 @@ final class WeatherViewController: UIViewController {
     
     // MARK: - Notification Center
     
-    func setNotificasion() {
+    private func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(viewWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(viewDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     @objc func viewWillEnterForeground(_ notification: Notification) {
         if self.isViewLoaded && self.view.window != nil {
-            print("フォアグラウンド")
             weatherModel.fetchWeather()
         }
     }
@@ -92,8 +108,15 @@ extension WeatherViewController: WeatherModelDelegate {
         minTemperature.text = String(weather.minTemperature)
     }
     
-    func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String) {
-        let alertController = UIAlertController(title: "エラーが発生しました", message: error, preferredStyle: .alert)
+    func weatherModel(_ weatherModel: WeatherModel, didOccurError error: ShowError) {
+        let errorMessage: String
+        switch error {
+        case .invalidParameterError:
+            errorMessage = "jsonのパースに失敗しました"
+        case .unknownError:
+            errorMessage = "予期しないエラーが発生しました"
+        }
+        let alertController = UIAlertController(title: "エラーが発生しました", message: errorMessage, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
