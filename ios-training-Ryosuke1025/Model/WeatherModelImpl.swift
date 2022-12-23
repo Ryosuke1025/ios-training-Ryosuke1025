@@ -34,31 +34,31 @@ final class WeatherModelImpl: WeatherModel {
         let request = RequestModel(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
         do {
             let requestData = try encode(request: request)
-        } catch {
-            delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
-        }
-        guard let requestString = String(data: requestData, encoding: .utf8) else {
-            assertionFailure("データ型からString型への変換に失敗しました")
-            return
-        }
-        do {
-            let responseString = try YumemiWeather.fetchWeather(requestString)
-            guard let responseData = responseString.data(using: .utf8) else {
-                assertionFailure("受け取ったString型からデータ型への変換に失敗しました")
+            guard let requestString = String(data: requestData, encoding: .utf8) else {
+                assertionFailure("データ型からString型への変換に失敗しました")
                 return
             }
             do {
-                let response = try decode(responseData: responseData)
-                delegate?.weatherModel(self, didFetchWeather: response)
+                let responseString = try YumemiWeather.fetchWeather(requestString)
+                guard let responseData = responseString.data(using: .utf8) else {
+                    assertionFailure("受け取ったString型からデータ型への変換に失敗しました")
+                    return
+                }
+                do {
+                    let response = try decode(responseData: responseData)
+                    delegate?.weatherModel(self, didFetchWeather: response)
+                } catch {
+                    delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
+                }
+                
+            } catch let error as YumemiWeatherError {
+                switch error {
+                case .invalidParameterError:
+                    delegate?.weatherModel(self, didOccurError: "jsonのパースに失敗しました")
+                case .unknownError:
+                    delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
+                }
             } catch {
-                delegate?.weatherModel(self, didOccurError: "")
-            }
-            
-        } catch let error as YumemiWeatherError {
-            switch error {
-            case .invalidParameterError:
-                delegate?.weatherModel(self, didOccurError: "jsonのパースに失敗しました")
-            case .unknownError:
                 delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
             }
         } catch {
