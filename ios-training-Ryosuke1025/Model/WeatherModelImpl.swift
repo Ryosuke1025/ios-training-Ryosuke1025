@@ -18,10 +18,6 @@ protocol WeatherModel {
     func fetchWeather()
 }
 
-enum JsonError: Error{
-    case encode
-    case decode
-}
 final class WeatherModelImpl: WeatherModel {
     
     // MARK: - Properties
@@ -31,9 +27,10 @@ final class WeatherModelImpl: WeatherModel {
     // MARK: - Methods
     
     func fetchWeather() {
+        let convert = Convert()
         let request = RequestModel(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
         do {
-            let requestData = try encode(request: request)
+            let requestData = try convert.encode(request: request)
             guard let requestString = String(data: requestData, encoding: .utf8) else {
                 assertionFailure("データ型からString型への変換に失敗しました")
                 return
@@ -45,7 +42,7 @@ final class WeatherModelImpl: WeatherModel {
                     return
                 }
                 do {
-                    let response = try decode(responseData: responseData)
+                    let response = try convert.decode(responseData: responseData)
                     delegate?.weatherModel(self, didFetchWeather: response)
                 } catch {
                     delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
@@ -64,23 +61,5 @@ final class WeatherModelImpl: WeatherModel {
         } catch {
             delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
         }
-    }
-    
-    func encode(request: RequestModel) throws -> Data {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .sortedKeys
-        guard let requestData = try? encoder.encode(request) else {
-            throw JsonError.encode
-        }
-        return requestData
-    }
-    
-    func decode(responseData: Data) throws -> ResponseModel {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        guard let response = try? decoder.decode(ResponseModel.self, from: responseData) else {
-            throw JsonError.decode
-        }
-        return response
     }
 }
