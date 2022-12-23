@@ -108,8 +108,15 @@ extension WeatherViewController: WeatherModelDelegate {
         minTemperature.text = String(weather.minTemperature)
     }
     
-    func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String) {
-        let alertController = UIAlertController(title: "エラーが発生しました", message: error, preferredStyle: .alert)
+    func weatherModel(_ weatherModel: WeatherModel, didOccurError error: ShowError) {
+        let errorMessage: String
+        switch error {
+        case .invalidParameterError:
+            errorMessage = "jsonのパースに失敗しました"
+        case .unknownError:
+            errorMessage = "予期しないエラーが発生しました"
+        }
+        let alertController = UIAlertController(title: "エラーが発生しました", message: errorMessage, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }

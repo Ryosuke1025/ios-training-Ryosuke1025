@@ -10,7 +10,7 @@ import YumemiWeather
 
 protocol WeatherModelDelegate: AnyObject {
     func weatherModel(_ weatherModel: WeatherModel, didFetchWeather weather: ResponseModel)
-    func weatherModel(_ weatherModel: WeatherModel, didOccurError error: String)
+    func weatherModel(_ weatherModel: WeatherModel, didOccurError error: ShowError)
 }
 
 protocol WeatherModel {
@@ -18,6 +18,10 @@ protocol WeatherModel {
     func fetchWeather()
 }
 
+enum ShowError {
+    case invalidParameterError
+    case unknownError
+}
 final class WeatherModelImpl: WeatherModel {
     
     // MARK: - Properties
@@ -45,21 +49,21 @@ final class WeatherModelImpl: WeatherModel {
                     let response = try convert.decode(responseData: responseData)
                     delegate?.weatherModel(self, didFetchWeather: response)
                 } catch {
-                    delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
+                    delegate?.weatherModel(self, didOccurError: ShowError.unknownError)
                 }
                 
             } catch let error as YumemiWeatherError {
                 switch error {
                 case .invalidParameterError:
-                    delegate?.weatherModel(self, didOccurError: "jsonのパースに失敗しました")
+                    delegate?.weatherModel(self, didOccurError: ShowError.invalidParameterError)
                 case .unknownError:
-                    delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
+                    delegate?.weatherModel(self, didOccurError: ShowError.unknownError)
                 }
             } catch {
-                delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
+                delegate?.weatherModel(self, didOccurError: ShowError.unknownError)
             }
         } catch {
-            delegate?.weatherModel(self, didOccurError: "予期しないエラーが発生しました")
+            delegate?.weatherModel(self, didOccurError: ShowError.unknownError)
         }
     }
 }
